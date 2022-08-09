@@ -1,3 +1,4 @@
+import { ExitGuard } from './guards/exit.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './guards/login.guard';
@@ -6,6 +7,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PageErrorComponent } from './pages/page-error/page-error.component';
+import { LoginSubrotasGuard } from './guards/login-subrotas.guard';
 
 // Route -> Objeto que define uma rota
 const routes: Routes = [
@@ -26,7 +28,8 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    canActivate: [LoginGuard],
+    canActivateChild: [LoginSubrotasGuard],
+    canDeactivate: [ExitGuard],
     children: [ // rotas filhas
       {
         path: "",
